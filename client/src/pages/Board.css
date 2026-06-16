@@ -1,0 +1,186 @@
+.board-page {
+  min-height: 100vh;
+  background: #0d0d1a;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.board-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.7);
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s;
+}
+
+.back-btn:hover { background: rgba(255,255,255,0.12); }
+
+.board-nav-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #a78bfa;
+  flex: 1;
+}
+
+.online-badge {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.board-columns {
+  display: flex;
+  gap: 1.25rem;
+  padding: 2rem;
+  overflow-x: auto;
+  align-items: flex-start;
+  min-height: calc(100vh - 60px);
+}
+
+.column {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  width: 300px;
+  flex-shrink: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.column-header h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+}
+
+.card-count {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+}
+
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 4px;
+}
+
+.card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+  user-select: none;
+}
+
+.card:hover {
+  background: rgba(124, 111, 247, 0.12);
+  border-color: rgba(124, 111, 247, 0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.card:active { cursor: grabbing; }
+
+.card-overlay {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  rotate: 2deg;
+  background: rgba(124, 111, 247, 0.2) !important;
+  border-color: rgba(124, 111, 247, 0.4) !important;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+  flex: 1;
+}
+
+.card-delete {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.2);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  transition: color 0.15s;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.card-delete:hover { color: #fca5a5; }
+
+.add-card-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.add-card-input {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  color: #fff;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.add-card-input::placeholder { color: rgba(255,255,255,0.2); }
+.add-card-input:focus { border-color: #7c6ff7; }
+
+.btn-add-card {
+  background: rgba(124, 111, 247, 0.2);
+  border: 1px solid rgba(124, 111, 247, 0.3);
+  color: #a78bfa;
+  border-radius: 8px;
+  width: 34px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-add-card:hover { background: rgba(124, 111, 247, 0.35); }
+
+.board-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #0d0d1a;
+  color: rgba(255,255,255,0.4);
+  font-family: 'Inter', sans-serif;
+}

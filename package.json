@@ -1,0 +1,13 @@
+{
+  "name": "taskboard",
+  "version": "1.0.0",
+  "description": "Task collaboration board - full stack",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "node server/index.js",
+    "start": "node server/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

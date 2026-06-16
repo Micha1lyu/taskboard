@@ -1,0 +1,52 @@
+-- 建立資料庫
+CREATE DATABASE IF NOT EXISTS taskboard CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE taskboard;
+
+-- 使用者
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 看板
+CREATE TABLE IF NOT EXISTS boards (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  owner_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 看板成員（邀請功能用）
+CREATE TABLE IF NOT EXISTS board_members (
+  board_id INT NOT NULL,
+  user_id INT NOT NULL,
+  PRIMARY KEY (board_id, user_id),
+  FOREIGN KEY (board_id) REFERENCES boards(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 欄位（待辦、進行中、完成）
+CREATE TABLE IF NOT EXISTS `columns` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  board_id INT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  position INT DEFAULT 0,
+  FOREIGN KEY (board_id) REFERENCES boards(id) ON DELETE CASCADE
+);
+
+-- 任務卡片
+CREATE TABLE IF NOT EXISTS cards (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  column_id INT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  assignee_id INT,
+  position INT DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (column_id) REFERENCES `columns`(id) ON DELETE CASCADE,
+  FOREIGN KEY (assignee_id) REFERENCES users(id) ON DELETE SET NULL
+);
