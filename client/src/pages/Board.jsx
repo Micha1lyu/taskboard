@@ -3,10 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   DndContext,
   closestCenter,
+  rectIntersection,
   PointerSensor,
   useSensor,
   useSensors,
   DragOverlay,
+  useDroppable,
 } from '@dnd-kit/core'
 import {
   SortableContext,
@@ -19,6 +21,16 @@ import { io } from 'socket.io-client'
 import api from '../api'
 import { useAuth } from '../context/AuthContext'
 import './Board.css'
+
+// ── 可放置欄位 ───────────────────────────────
+function DroppableColumn({ colId, children }) {
+  const { setNodeRef, isOver } = useDroppable({ id: `col-${colId}` })
+  return (
+    <div ref={setNodeRef} className={`cards-list${isOver ? ' col-over' : ''}`}>
+      {children}
+    </div>
+  )
+}
 
 // ── 單張卡片元件 ──────────────────────────────
 function SortableCard({ card, onDelete }) {
@@ -201,7 +213,7 @@ export default function Board() {
 
       <DndContext
         sensors={sensors}
-        collisionDetection={closestCenter}
+        collisionDetection={rectIntersection}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
@@ -217,11 +229,11 @@ export default function Board() {
                 items={col.cards.map(c => `card-${c.id}`)}
                 strategy={verticalListSortingStrategy}
               >
-                <div className="cards-list">
+              <DroppableColumn colId={col.id}>
                   {col.cards.map(card => (
                     <SortableCard key={card.id} card={card} onDelete={deleteCard} />
                   ))}
-                </div>
+              </DroppableColumn>
               </SortableContext>
 
               {/* 新增卡片 */}

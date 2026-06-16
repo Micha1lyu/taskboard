@@ -90,6 +90,13 @@
   flex-direction: column;
   gap: 0.5rem;
   min-height: 4px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.col-over {
+  background: rgba(124, 111, 247, 0.08);
+  outline: 1px dashed rgba(124, 111, 247, 0.3);
 }
 
 .card {
